@@ -12,6 +12,7 @@ import { SwimlaneFlowInput } from "../types/swimlane-flow-types";
 import { Button } from "@mui/material";
 import CustomNode from "../include/CustomNode";
 import SwimlaneEdge from "../include/SwimlaneEdge";
+import Toolbar from "./Toolbar";
 
 const proOptions = { hideAttribution: true };
 
@@ -47,37 +48,40 @@ const SwimlaneFlow = (props: {
     fitView();
   }, [reactflowEdges, reactflowNodes, fitView]);
   return (
-    <ReactFlow
-      nodes={reactflowNodes}
-      onNodesChange={onNodesChange}
-      onEdgesChange={onEdgesChange}
-      edges={reactflowEdges}
-      nodeTypes={nodeTypes}
-      edgeTypes={edgeTypes}
-      fitView
-      connectionMode={ConnectionMode.Loose}
-      proOptions={proOptions}
-    >
-      <Panel position="top-right">
-        <Button
-          onClick={() => setRankDir("TB")}
-          variant="contained"
-          className="Panel-Button"
-          autoCapitalize="false"
-        >
-          Top to Bottom
-        </Button>{" "}
-        <Button
-          onClick={() => setRankDir("LR")}
-          variant="contained"
-          className="Panel-Button"
-          autoCapitalize="false"
-        >
-          Left to Right
-        </Button>
-      </Panel>
-      <Controls />
-    </ReactFlow>
+    <>
+      <Toolbar />
+      <ReactFlow
+        nodes={reactflowNodes}
+        edges={reactflowEdges}
+        onNodesChange={onNodesChange}
+        onEdgesChange={onEdgesChange}
+        nodeTypes={nodeTypes}
+        edgeTypes={edgeTypes}
+        fitView
+        connectionMode={ConnectionMode.Loose}
+        proOptions={proOptions}
+      >
+        <Panel position="top-right">
+          <Button
+            onClick={() => setRankDir("TB")}
+            variant="contained"
+            className="Panel-Button"
+            autoCapitalize="false"
+          >
+            Top to Bottom
+          </Button>{" "}
+          <Button
+            onClick={() => setRankDir("LR")}
+            variant="contained"
+            className="Panel-Button"
+            autoCapitalize="false"
+          >
+            Left to Right
+          </Button>
+        </Panel>
+        <Controls />
+      </ReactFlow>
+    </>
   );
 };
 
